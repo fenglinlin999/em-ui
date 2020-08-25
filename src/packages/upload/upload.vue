@@ -1,6 +1,8 @@
 <template>
     <div class="em-upload">
-        <div @click="handleClick" class="em-upload-btn">
+        <uploadDragger v-if="drag" :accept="accept" @file="uploadFiles"></uploadDragger>
+        <template v-else>
+            <div @click="handleClick" class="em-upload-btn">
            <slot></slot>
         </div>
         <input
@@ -12,20 +14,35 @@
         ref="input"
         class="input"
         />
+        </template>
         <div>
             <slot name="tip"></slot>
         </div>
-        {{files.length}}
+        <ul>
+            <li v-for="(file,index) in files" :key="file.uid+index">
+               <div class="list-item">
+                   <em-icon icon="file"></em-icon>
+                   {{file.name}}
+                   <em-progress v-if="file.status === 'uploading'" :percentage="file.percentage"></em-progress>
+                   {{file.status}}
+                   <em-icon icon="cha"></em-icon>
+               </div>
+            </li>
+        </ul>
     </div>
 </template>
 <script>
 import ajax from './ajax.js'
+import uploadDragger from './upload-dragger.vue'
 export default {
     name:"em-upload",
+    components:{
+        uploadDragger
+    },
     data () {
        return {
            tempIndex:1,
-           files:[], //存储要展示的列表
+           files:[], //存储要展示的列表,可以在这里删除你要删除的文件（询问用户是否要删除？确定 取消）
            reqs:{}
        }
     },
@@ -54,7 +71,11 @@ export default {
         httpRequest:{//我会默认提供一个ajax 如果你传了就用你的
             type:Function,
             default:ajax
-        }
+        },
+        drag:{
+            type:Boolean,
+            default:false
+        } //面试设计一个组件 1，用户要有哪些功能，2，你需要暴露给用户哪些功能，3，在考虑用户的行为 再去设计组件
     },
     watch:{
         fileList:{
@@ -79,7 +100,7 @@ export default {
           rawFile.uid = Math.random() + this.tempIndex++;
           let file = { //我自己构建了一条文件信息
               status:"ready", // 默认准备上传
-              name:rawFile.name, // 文件名字
+              name:this.name, // 文件名字
               size:rawFile.size, // 上传图片的大小
               percentage:0, // 上传的进度
               uid:rawFile.uid,
@@ -88,6 +109,30 @@ export default {
            this.files.push(file); //用户上传的文件放到列表当中，一会儿要显示
            this.onChange && this.onChange(file);
         
+        },
+        getFile(rawFile){
+            return this.files.find(file=>file.uid == rawFile.uid);
+        },
+        handleProgress(ev,rawFile){
+          //给不同的状态
+          //通过源文件 用户上传的文件 -》我格式化的结果
+          let file = this.getFile(rawFile); //这个file就是当前格式化后的
+          file.status = 'uploading';
+          file.percentage = ev.percent || 0; //赋值上传进度
+          this.onProgress(ev,rawFile); //调用用户的回调
+        },
+        handleSuccess(res,rawFile){
+           let file = this.getFile(rawFile);
+           files.status = 'success';
+           this.onSuccess(res,rawFile);
+           this.onChange(file);
+        },
+        handleError(err,rawFile){
+           let file = this.getFile(rawFile);
+           file.status = 'fail';
+           this.onError(err,rawFile);
+           this.onChange(file);
+           delete this.reqs[file.uid]; //已经失败的ajax 不需要后续在中断请求了
         },
         post(rawFile){
           //真正的上传逻辑
@@ -100,17 +145,23 @@ export default {
               action:this.action,
               onProgress:ev=>{
                 // 上传处理中的状态
+                console.log(ev,rawFile);
+                this.handleProgress(ev,rawFile);
               },
               onSuccess:res=>{
                 // 上伟成功的状态
+                console.log(res,rawFile);
+                this.handleSuccess(res,rawFile);
               },
               onError:err=>{
                  //处理失败时的状态
+                 console.log(err,rawFile);
+                 this.handleError(err,rawFile);
               }
             }
             // req就是当前的请求
-            let req = httpRequest(options);
-            tihs.reqs[uid] = req;//每个ajax先存起来，稍后可以取消请求
+            let req = this.httpRequest(options);
+            this.reqs[uid] = req;//每个ajax先存起来，稍后可以取消请求
             //允许用户使用的是promise的ajax
             if(req && req.then){
                 req.then(options.onSuccess,options.onError)

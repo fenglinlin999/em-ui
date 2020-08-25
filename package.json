@@ -12,9 +12,12 @@
   "main": "./dist/em-ui.umd.min.js",
   "dependencies": {
     "core-js": "^2.6.11",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
+    "@koa/multer": "^3.0.0",
+    "@koa/router": "^9.4.0",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-unit-mocha": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
@@ -26,7 +29,10 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^4.0.2",
+    "koa": "^2.13.0",
+    "koa-cors": "0.0.16",
     "mocha": "^8.0.1",
+    "multer": "^1.4.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"

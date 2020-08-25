@@ -25,6 +25,7 @@
   :on-error="handleError"
   :on-progress="handleProgress"
   :before-upload="beforeUpload"
+  :drag="true"
 >
 <em-button type="primary" icon="shangchuan">
   点击上传
@@ -200,7 +201,6 @@ export default {
   data(){
     return {
       fileList:[
-        {url:'xxx',name:'fenglinlin'},
         {url:'xxx',name:'fenglinlin'}
       ]
     }
@@ -212,14 +212,15 @@ export default {
     handleChange(file){
       console.log(file);
     },
-    handleSuccess(){
-
+    handleSuccess(res,rawFile){
+      console.log(res);
     },
-    handleError(){
-
+    handleError(err,rawFile){
+      console.log(err);
+      console.log('上传失败');
     },
-    handleProgress(){
-
+    handleProgress(ev,rawFile){
+      console.log(ev);
     },
     beforeUpload(rawFile){
       let limitSize = rawFile.size / 1024 > 500

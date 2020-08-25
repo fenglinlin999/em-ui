@@ -13,6 +13,7 @@ import Footer from './container/footer.vue';
 import Main from './container/main.vue';
 import Input from './input.vue'
 import upLoad from './upload/upload.vue'
+import emProgress from './progress.vue'
 const install = (Vue)=>{
     Vue.component(Button.name,Button)
     Vue.component(Icon.name,Icon)
@@ -26,6 +27,7 @@ const install = (Vue)=>{
     Vue.component(Footer.name,Footer)
     Vue.component(Input.name,Input)
     Vue.component(upLoad.name,upLoad)
+    Vue.component(emProgress.name,emProgress)
 }
 //有可能组件会通过script标签的方式引入
 //<script src = 'em-ui'></script>
