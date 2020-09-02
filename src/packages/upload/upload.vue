@@ -21,7 +21,7 @@
         <ul>
             <li v-for="(file,index) in files" :key="file.uid+index">
                <div class="list-item">
-                   <em-icon icon="file"></em-icon>
+                   <em-icon icon="image"></em-icon>
                    {{file.name}}
                    <em-progress v-if="file.status === 'uploading'" :percentage="file.percentage"></em-progress>
                    {{file.status}}

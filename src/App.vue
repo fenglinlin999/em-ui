@@ -188,6 +188,13 @@
       <div class="grid-content bg-purple-light"></div>
     </em-col>
   </em-row> -->
+
+  <!--日历-->
+{{value}}
+<hr>
+<em-date-picker v-model="value"></em-date-picker>
+<!-- {{value2}}
+<date-range-picker v-model="value2"></date-range-picker> -->
 </div>
 </template>
 <script>
@@ -202,7 +209,9 @@ export default {
     return {
       fileList:[
         {url:'xxx',name:'fenglinlin'}
-      ]
+      ],
+      value:'',
+      value2:[]
     }
   },
   methods:{

@@ -14,6 +14,8 @@ import Main from './container/main.vue';
 import Input from './input.vue'
 import upLoad from './upload/upload.vue'
 import emProgress from './progress.vue'
+import DataPicker from './date-picker/date-picker.vue'
+import DataRangePicker from './date-picker/date-range-picker.vue'
 const install = (Vue)=>{
     Vue.component(Button.name,Button)
     Vue.component(Icon.name,Icon)
@@ -28,6 +30,8 @@ const install = (Vue)=>{
     Vue.component(Input.name,Input)
     Vue.component(upLoad.name,upLoad)
     Vue.component(emProgress.name,emProgress)
+    Vue.component(DataPicker.name,DataPicker)
+    Vue.component(DataRangePicker.name,DataRangePicker)
 }
 //有可能组件会通过script标签的方式引入
 //<script src = 'em-ui'></script>

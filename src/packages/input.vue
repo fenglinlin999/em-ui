@@ -12,6 +12,9 @@
            :disabled="disabled"
            @input="$emit('input',$event.target.value)"
            ref="input"
+           @focus="$emit('focus',$event.target.value)"
+           @blur="$emit('blur',$event.target.value)"
+           @change="$emit('change',$event)"
         />
         <em-icon 
             :icon="suffixIcon"
@@ -124,7 +127,6 @@ export default {
         cursor: pointer;
         width:14.5px;
         height:14.5px;
-        background:red;
    }
 }
 .em-input-prefix-icon{

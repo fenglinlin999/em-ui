@@ -5,7 +5,7 @@
         @dragover.prevent
         @dragleave.prevent
     >
-        <em-icon icon="shangchuan" class="icon"></em-icon>
+        <em-icon icon="ziyuan" class="icon"></em-icon>
         <span>将文件拖拽到此区域即可</span>
     </div>
 </template>
@@ -39,7 +39,6 @@ export default {
             width: 65px;
             height: 65px;
             margin: 65px auto 10px;
-            background:chartreuse;
         }
     }
 
