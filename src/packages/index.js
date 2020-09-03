@@ -16,6 +16,8 @@ import upLoad from './upload/upload.vue'
 import emProgress from './progress.vue'
 import DataPicker from './date-picker/date-picker.vue'
 import DataRangePicker from './date-picker/date-range-picker.vue'
+
+import infiniteScroll from './infiniteScroll'
 const install = (Vue)=>{
     Vue.component(Button.name,Button)
     Vue.component(Icon.name,Icon)
@@ -32,6 +34,7 @@ const install = (Vue)=>{
     Vue.component(emProgress.name,emProgress)
     Vue.component(DataPicker.name,DataPicker)
     Vue.component(DataRangePicker.name,DataRangePicker)
+    Vue.directive(infiniteScroll.name,infiniteScroll)
 }
 //有可能组件会通过script标签的方式引入
 //<script src = 'em-ui'></script>
