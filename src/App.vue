@@ -1,40 +1,23 @@
 <template>
-  <div id="app">
-    <ul style="overflow-y:scroll" 
-        v-infinite-scroll="load" 
-        class="box"
-        infinite-scroll-disabled="disabled"
-        infinite-scroll-delay="delay"
-        infinite-scroll-distance="distance"
-    >
-      <li v-for="c in count" :key="c">{{c}}</li>
-    </ul>
+  <div id="app" style="margin:200px 0 0 300px">
+      <em-popover
+         v-model="value"
+         width='200px'
+         title="标题"
+         content="内容内容，这是一个popover"
+         trigger="hover"
+         placement="right"
+      >
+        <em-button type="primary" slot="reference">点我弹框</em-button>  
+      </em-popover>
   </div>
 </template>
 <script>
 export default {
-  name: "App",
-  data() {
+  data(){
     return {
-      count: 0,
-      disabled: false,
-      delay:200,
-      distance:30,
-      immediate:true
-    };
-  },
-  methods: {
-    load() {
-      this.count += 2;
+      value:true
     }
   }
-};
-</script>
-<style lang="scss">
-@import "./styles/_var.scss";
-.box {
-  width: 400px;
-  height: 300px;
-  border: 1px solid green;
 }
-</style>
+</script>

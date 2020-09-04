@@ -16,6 +16,7 @@ import upLoad from './upload/upload.vue'
 import emProgress from './progress.vue'
 import DataPicker from './date-picker/date-picker.vue'
 import DataRangePicker from './date-picker/date-range-picker.vue'
+import popOver from './popover.vue'
 
 import infiniteScroll from './infiniteScroll'
 const install = (Vue)=>{
@@ -35,6 +36,7 @@ const install = (Vue)=>{
     Vue.component(DataPicker.name,DataPicker)
     Vue.component(DataRangePicker.name,DataRangePicker)
     Vue.directive(infiniteScroll.name,infiniteScroll)
+    Vue.component(popOver.name,popOver)
 }
 //有可能组件会通过script标签的方式引入
 //<script src = 'em-ui'></script>
