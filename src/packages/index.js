@@ -19,6 +19,8 @@ import DataRangePicker from './date-picker/date-range-picker.vue'
 import popOver from './popover.vue'
 import Carousel from './carousel/carousel.vue'
 import CarouselItem from './carousel/carousel-item.vue'
+import Pagination from './pagination/pagination.vue'
+import Table from './table/table.vue'
 
 import infiniteScroll from './infiniteScroll'
 const install = (Vue)=>{
@@ -41,6 +43,8 @@ const install = (Vue)=>{
     Vue.component(popOver.name,popOver)
     Vue.component(Carousel.name,Carousel)
     Vue.component(CarouselItem.name,CarouselItem)
+    Vue.component(Pagination.name,Pagination)
+    Vue.component(Table.name,Table)
 }
 //有可能组件会通过script标签的方式引入
 //<script src = 'em-ui'></script>
